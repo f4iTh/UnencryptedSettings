@@ -1,0 +1,7 @@
+{
+  "name": "UnencryptedSettings",
+  "description": "A mod that prevents the game settings file being encrypted when it is saved.",
+  "version_number": "0.1.0",
+  "dependencies": [],
+  "website_url": "https://github.com/f4iTh/UnencryptedSettings"
+}
