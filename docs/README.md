@@ -4,7 +4,7 @@
 
 The main purpose of this mod was to figure out whether it is possible to rebind the `Accept` and `Cancel` buttons, as these are locked in the in-game settings.
 
-As it turns out, by manually editing the (unencrypted) `settings.json` file to add custom keybindings that are not possible to do in-game, 
+As it turns out, by manually editing the (unencrypted) `settings.json` file to add custom keybindings that are not possible to do in-game,
 the game will still gladly count them as proper keybindings, making it is possible to swap the `Accept` and `Cancel` keybindings (and more).
 
 ## Custom keybindings
@@ -14,6 +14,7 @@ The following custom keybindings will swap most (if not all) in the following ma
 - All `A` button actions are swapped with the `B` button and vice versa
 - All `X` button actions are swapped with the `Y` button and vice versa
 
+<!-- @formatter:off -->
 ```json
 "GamepadBindings": [
   {
@@ -248,3 +249,4 @@ The following custom keybindings will swap most (if not all) in the following ma
   }
 ],
 ```
+<!-- @formatter:on -->
