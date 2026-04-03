@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <Import Project="find-game-path.targets"/>
+
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <Description>My first plugin</Description>
         <Version>1.0.0</Version>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -27,8 +29,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Reference Include="Assembly-CSharp">
-            <HintPath>D:\SteamLibrary\steamapps\common\Cult of the Lamb\Cult Of The Lamb_Data\Managed\Assembly-CSharp.dll</HintPath>
-        </Reference>
+        <Reference Include="Assembly-CSharp" HintPath="$(GamePath)\Cult Of The Lamb_Data\Managed\Assembly-CSharp.dll" Private="false"/>
     </ItemGroup>
 </Project>
