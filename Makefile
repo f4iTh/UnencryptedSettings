@@ -28,4 +28,4 @@ zip-debug-nexusmods:
 	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION)_nexusmods_debug.zip" ./bin/Debug/$(TARGET_FRAMEWORK)/UnencryptedSettings.dll ./bin/Debug/$(TARGET_FRAMEWORK)/UnencryptedSettings.pdb
 
 zip-debug-thunderstore:
-	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION)_debug.zip" ./manifest.json ./icon.png ./bin/Debug/$(TARGET_FRAMEWORK)/UnencryptedSettings.dll ./bin/Debug/$(TARGET_FRAMEWORK)/UnencryptedSettings.pdb
+	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION)_debug.zip" ./manifest.json ./icon.png ./docs/README.md ./bin/Debug/$(TARGET_FRAMEWORK)/UnencryptedSettings.dll ./bin/Debug/$(TARGET_FRAMEWORK)/UnencryptedSettings.pdb
