@@ -478,3 +478,6 @@ fabric.properties
 # unnecessary
 .idea/
 releases/
+
+# build artifacts
+/build/
