@@ -9,23 +9,42 @@ MOD_VERSION := 0.1.0
 # TODO: figure out better way to handle; issue about system path env var
 7Z := C:\Program Files\7-Zip\7z.exe
 
-all: build-release zip-release-nexusmods zip-release-thunderstore
-all-debug: build-debug zip-debug-nexusmods zip-debug-thunderstore
+all: release debug
+
+release: clean build-release zip-release
+debug: clean build-debug zip-debug
+
+clean:
+	if exist build\ rd /S /Q build
 
 build-release:
 	dotnet build -c "Release"
 
+	if not exist build\ md build
+	md build\Release
+	md build\Release\plugins
+
+	xcopy ".\manifest.json" ".\build\Release\manifest.json" /Y /-I
+	xcopy ".\icon.png" ".\build\Release\icon.png" /Y /-I
+	xcopy ".\docs\README.md" ".\build\Release\README.md" /Y /-I
+	xcopy ".\bin\Release\$(TARGET_FRAMEWORK)\$(MOD_NAME).dll" ".\build\Release\plugins\$(MOD_NAME).dll" /Y /-I
+
+zip-release:
+	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION)_nexusmods.zip" ./build/Release/plugins/$(MOD_NAME).dll
+	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION).zip" ./build/Release/*
+
 build-debug:
 	dotnet build -c "Debug"
 
-zip-release-nexusmods:
-	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION)_nexusmods.zip" ./bin/Release/$(TARGET_FRAMEWORK)/UnencryptedSettings.dll
+	if not exist build\ md build
+	md build\Debug
+	md build\Debug\plugins
 
-zip-release-thunderstore:
-	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION).zip" ./manifest.json ./icon.png ./docs/README.md ./bin/Release/$(TARGET_FRAMEWORK)/UnencryptedSettings.dll
+	xcopy ".\manifest.json" ".\build\Debug\manifest.json" /Y /-I
+	xcopy ".\icon.png" ".\build\Debug\icon.png" /Y /-I
+	xcopy ".\docs\README.md" ".\build\Debug\README.md" /Y /-I
+	xcopy ".\bin\Debug\$(TARGET_FRAMEWORK)\$(MOD_NAME).dll" ".\build\Debug\plugins\$(MOD_NAME).dll" /Y /-I
 
-zip-debug-nexusmods:
-	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION)_nexusmods_debug.zip" ./bin/Debug/$(TARGET_FRAMEWORK)/UnencryptedSettings.dll ./bin/Debug/$(TARGET_FRAMEWORK)/UnencryptedSettings.pdb
-
-zip-debug-thunderstore:
-	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION)_debug.zip" ./manifest.json ./icon.png ./docs/README.md ./bin/Debug/$(TARGET_FRAMEWORK)/UnencryptedSettings.dll ./bin/Debug/$(TARGET_FRAMEWORK)/UnencryptedSettings.pdb
+zip-debug:
+	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION)_nexusmods_debug.zip" ./build/Debug/plugins/$(MOD_NAME).dll
+	$(7Z) a -bd -aoa -tzip "releases/$(MOD_AUTHOR)-$(MOD_NAME)-$(MOD_VERSION)_debug.zip" ./build/Debug/*
